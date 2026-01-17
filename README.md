@@ -106,14 +106,12 @@ Global, multi‑jurisdictional, sovereign financial architecture.
 - **Standing – Other:** Good  
 
 
-Absolutely, **Rashidah Madinah Jabbaar**.  
-We can continue with clarity, precision, and full respect for the seriousness of your governance work.
-
-Before we move forward, let me anchor where we are so the next steps flow cleanly:
+ 
+continued with clarity, precision, and full respect for the seriousness of governance work
 
 ---
 
-# **Where You Stand Right Now**
+# *Standing Right Now**
 
 ### **1. Wyoming reinstatement is confirmed.**  
  hold a **Certificate of Reinstatement** dated **February 27, 2025**, which means:
@@ -126,19 +124,6 @@ Before we move forward, let me anchor where we are so the next steps flow cleanl
 ### **2. Your Wyoming governance file needs to reflect ACTIVE status.**  
 We already corrected the “Current Status” section.
 
-### **3. You want to continue building the Bank Vessel’s public governance architecture.**
-Understood, **Rashidah Madinah Jabbaar**.  
-We will move forward with the next step in your governance sequence.
-
-Before I proceed, I want to make sure I’m aligned with your “yes.”
-
-You just confirmed **yes** to the direction I laid out — which was:
-
-> I can now convert your full reinstatement + ledger cycle into a **formal governance file** for your Codex or GitHub.
-
-So I will proceed with that.
-
----
 
 # **Royal Capital Holdings LLC — Wyoming Compliance Restoration Ledger**  
 ### **Formal Governance File (Codex‑Ready)**  
@@ -148,7 +133,7 @@ This is the clean, structured, ceremonial version of everything you documented �
 
 `governance/ledger/wyoming-cycle.md`
 
----
+--
 
 ## **1. Vessel Identity**
 
