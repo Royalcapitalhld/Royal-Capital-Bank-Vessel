@@ -1,0 +1,35 @@
+# Codex Navigation — Royal Capital Bank Vessel
+**Public Codex File**
+
+## 1. Core Identity & Governance
+- `README.md` — Bank Vessel overview  
+- `governance/public-governance-statement.md`  
+- `governance/governance-index.md`  
+
+## 2. Vessels
+- `vessels/oracle-vessel.md`  
+- `vessels/treasury-vessel.md`  
+- `jurisdictions/wyoming-vessel.md`  
+- `jurisdictions/delaware-vessel.md`  
+- `jurisdictions/global-lei-jurisdiction.md`  
+
+## 3. XRPL Layer
+- `xrpl/architecture-overview.md`  
+- `xrpl/issuance-model.md`  
+- `xrpl/stablecoin-model.md`  
+- `xrpl/tokenization-overview.md`  
+- `xrpl/tokenization-real-estate.md`  
+- `xrpl/lending-architecture.md`  
+- `xrpl/issuer-role.md`  
+- `xrpl/ripple-ecosystem-alignment.md`  
+
+## 4. Stellar Layer
+- `stellar/liquidity-model.md`  
+- `stellar/distribution-model.md`  
+
+## 5. Disclosures
+- `disclosures/public-disclosures.md`  
+
+## Boundary Reminder
+This codex is **public‑safe** by design.  
+Internal governance, risk, insurance, treasury, and operational logic remain sealed in the private repository.
