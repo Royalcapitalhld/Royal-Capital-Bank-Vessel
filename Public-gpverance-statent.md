@@ -1,0 +1,12 @@
+/README.md
+/index.md
+/governance
+    public-governance-statement.md
+    vessel-architecture.md
+    issuer-profile.md
+    lei-verification.md
+    public-codex.md
+/xrpl
+    issuance-model.md
+    compliance-model.md
+    vessel-separated-logic.md
