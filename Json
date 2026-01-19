@@ -1,0 +1,193 @@
+
+```json name=package.json
+{
+  "name": "real-estate-royal-capital-holdings-blockchain",
+  "version": "0.1.0",
+  "description": "XRPL / Ripple / Stellar integration starter for Royal Capital holdings",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "xrpl": "node src/xrplClient.js",
+    "ripple": "node src/rippleClient.js",
+    "stellar": "node src/stellarClient.js",
+    "lint": "echo \"Add linter\""
+  },
+  "keywords": [
+    "xrpl",
+    "ripple",
+    "stellar",
+    "blockchain",
+    "payments"
+  ],
+  "author": "Royalcapitalhld",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "xrpl": "^5.3.0",
+    "ripple-lib": "^1.10.0",
+    "stellar-sdk": "^9.0.0",
+    "node-fetch": "^3.3.2"
+  }
+}
+```
+
+```text name=.env.example
+# Copy to .env and fill values. Keep secrets out of source control.
+
+# XRPL (XRP Ledger) - use testnet/devnet seed for testing
+XRPL_WALLET_SEED="s████████████████████████████"
+XRPL_WALLET_ADDRESS="r████████████████████████████"
+
+# RIPPLE (ripple-lib) - testnet WebSocket URL and seed (if needed)
+RIPPLE_SERVER="wss://s.altnet.rippletest.net:51233"
+RIPPLE_WALLET_SEED="s████████████████████████████"
+
+# STELLAR - use testnet secret and public key
+STELLAR_SECRET="S████████████████████████████"
+STELLAR_PUBLIC="G████████████████████████████"
+```
+
+```javascript name=src/xrplClient.js
+// Simple XRPL testnet connection example
+// Usage: npm run xrpl
+require('dotenv').config();
+const xrpl = require('xrpl');
+
+async function main() {
+  try {
+    const client = new xrpl.Client('wss://s.altnet.rippletest.net:51233'); // XRPL testnet
+    await client.connect();
+    console.log('XRPL: connected to testnet');
+
+    const seed = process.env.XRPL_WALLET_SEED;
+    if (!seed) {
+      console.log('XRPL: no seed in .env, creating a test wallet...');
+      const fundResp = await client.fundWallet();
+      console.log('XRPL: funded wallet', fundResp.wallet.classicAddress);
+      await client.disconnect();
+      return;
+    }
+
+    const wallet = xrpl.Wallet.fromSeed(seed);
+    console.log('XRPL wallet address:', wallet.address);
+
+    // Example: get account info
+    const acctInfo = await client.request({
+      command: 'account_info',
+      account: wallet.address,
+      ledger_index: 'validated'
+    });
+    console.log('XRPL account_info:', acctInfo.result.account_data ? 'present' : 'absent');
+
+    await client.disconnect();
+    console.log('XRPL: disconnected');
+  } catch (err) {
+    console.error('XRPL error:', err);
+  }
+}
+
+main();
+```
+
+```javascript name=src/rippleClient.js
+// ripple-lib simple connection (Ripple testnet)
+// Usage: npm run ripple
+require('dotenv').config();
+const RippleAPI = require('ripple-lib').RippleAPI;
+
+async function main() {
+  const server = process.env.RIPPLE_SERVER || 'wss://s.altnet.rippletest.net:51233';
+  const api = new RippleAPI({ server });
+
+  try {
+    await api.connect();
+    console.log('Ripple: connected to', server);
+
+    // Example: get server info
+    const serverInfo = await api.getServerInfo();
+    console.log('Ripple server info validated ledger:', serverInfo.validatedLedger ? serverInfo.validatedLedger.seq : 'n/a');
+
+    // If you have an address:
+    // const address = 'r...';
+    // const balances = await api.getBalances(address);
+    // console.log('balances', balances);
+
+    await api.disconnect();
+    console.log('Ripple: disconnected');
+  } catch (err) {
+    console.error('Ripple error:', err);
+    try { await api.disconnect(); } catch(e) {}
+  }
+}
+
+main();
+```
+
+```javascript name=src/stellarClient.js
+// Stellar SDK testnet example
+// Usage: npm run stellar
+require('dotenv').config();
+const StellarSDK = require('stellar-sdk');
+const fetch = require('node-fetch');
+
+async function main() {
+  try {
+    const server = new StellarSDK.Server('https://horizon-testnet.stellar.org');
+    StellarSDK.Networks.useTestNetwork();
+    console.log('Stellar: using testnet horizon');
+
+    const publicKey = process.env.STELLAR_PUBLIC;
+    if (!publicKey) {
+      console.log('Stellar: no public key in .env. You can create/fund an account for testing at friendbot:');
+      console.log('  https://friendbot.stellar.org/?addr=<your_public_key>');
+      return;
+    }
+
+    const account = await server.loadAccount(publicKey);
+    console.log('Stellar account loaded:', account.account_id);
+    console.log('Stellar balances:');
+    account.balances.forEach(b => console.log(' -', b.asset_type, b.balance));
+  } catch (err) {
+    console.error('Stellar error:', err);
+  }
+}
+
+main();
+```
+
+````markdown name=README.md
+# Real-Estate Royal Capital Holdings — Blockchain Integrations (starter)
+
+This repository area contains starter code for connecting to XRPL (XRP Ledger), Ripple (ripple-lib), and Stellar testnets.
+
+Quickstart
+1. Copy `.env.example` to `.env` and fill values (for testing you can create test wallets).
+2. Install deps:
+   ```bash
+   npm install
+   ```
+3. Run examples:
+   ```bash
+   npm run xrpl
+   npm run ripple
+   npm run stellar
+   ```
+
+Notes
+- These examples use testnets only. Do NOT put production secrets in source control.
+- Replace example seeds/secrets with secure storage (Vault, Secrets Manager) in production.
+- I can extend these examples to:
+  - Send/receive payments
+  - Build payment endpoints (Express)
+  - Add unit tests and CI
+  - Integrate with your existing repo structure
+
+If you want, I can push these into your GitHub repo directly — tell me the exact repo owner/name and confirm you want me to create these files (I will need permission to write), or grant access and I’ll run a repo search and integrate with your current codebase.
+````
+
+What I recommend next
+- If you want me to add these files into the GitHub repo directly, tell me the repository owner/name (you already provided Royalcapitalhld/Real-Estate-Royal-Capital-holdings-), confirm you want me to create these files, and confirm the repo is accessible (or grant me access). I can then call the write tool and push them.
+- Or paste/upload your current repo contents (or a link with permission) so I can integrate with what you already have instead of adding new top-level files.
+- If you prefer another language (Python/Go), I can prepare equivalent examples.
+
+Which would you like me to do now?
