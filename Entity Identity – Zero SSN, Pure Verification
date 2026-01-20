@@ -1,0 +1,7 @@
+// Example: HC-1 Identity Anchor
+{
+  "entity_id": "549300VZKFKMZRK12345",
+  "jurisdiction": "Delaware, USA",
+  "doc_hash": "QmXyZ...abc123",
+  "xrpl_account": "rHC1...xyz789"
+}
