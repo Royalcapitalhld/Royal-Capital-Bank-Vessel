@@ -1,0 +1,5 @@
+# Using xrpl-haskell or xrpl-py CLI
+xrpl-hook install \
+  --account rHC1_ESCROW...abc123 \
+  --wasm ./build/honor_hook.wasm \
+  --flags hfOverride | hfKeepOnDeposit
