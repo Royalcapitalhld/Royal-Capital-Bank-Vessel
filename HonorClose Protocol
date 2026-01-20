@@ -1,0 +1,48 @@
+# Clone or create
+gh repo create honorclose-protocol --public --clone
+cd honorclose-protocol
+
+# Build the pure structure
+mkdir -p \
+  compliance/{gaap-engine,entity-verify,audit-log} \
+  holdings/{hc1,hc2,hc3,hc4,hc5,hc6} \
+  contracts \
+  bridges \
+  tokens \
+  docs
+
+# Core files
+echo '# HonorClose Protocol
+
+**Pure. Private. Honorable.**
+
+A $1T assurance layer for global real estate — built on XRP Ledger, GAAP-compliant, SSN-free, and honor-bound by code.
+
+- 6 holding companies, fully tokenized
+- Instant double closes
+- Zero trust, full integrity
+- Nothing less accepted.' > README.md
+
+# Generate GAAP engine
+cat > compliance/gaap-engine.js << 'EOF'
+// ASC 860 / ASC 360 Journal Generator
+// HonorClose Protocol - Integrity by Design
+function generateRealEstateJournal({ price, sellerBookValue, sellerAccumDep }) {
+  const gain = price - (sellerBookValue - sellerAccumDep);
+  return {
+    seller: [
+      { account: 'cash', dr: price },
+      { account: 'accumulated_depreciation', dr: sellerAccumDep },
+      { account: 'real_estate', cr: sellerBookValue },
+      { account: 'gain_on_sale', cr: gain }
+    ],
+    buyer: [
+      { account: 'real_estate', dr: price },
+      { account: 'cash', cr: price }
+    ]
+  };
+}
+module.exports = { generateRealEstateJournal };
+EOF
+
+git add . && git commit -m "feat: pure, honorable, GAAP-aligned foundation" && git push
