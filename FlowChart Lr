@@ -1,0 +1,10 @@
+flowchart LR
+    A[Buyer: Sends XRP/USD.HC1] --> B[HonorClose Escrow]
+    C[Seller: Submits Title Commitment] --> D[IPFS + Oracle]
+    E[Local Agent: Records Deed] --> F[Upload Signed Receipt]
+    B --> G{All Conditions Met?}
+    D --> G
+    F --> G
+    G -- Yes --> H[Auto-Split Funds<br>+ Burn Deed Token<br>+ Emit GAAP Journal]
+    H --> I[Seller: Receives Net Proceeds<br>in <60 sec]
+
