@@ -1,0 +1,17 @@
+# File: bridges/stellar/hc5-anchor.yaml
+ISSUER_SEED: "SB..."  # HC-5 issuer secret
+DISTRIBUTION_ACCOUNT: "GA..."  # Public payout address
+
+ASSET_CODE: "ASSURE"
+ASSET_ISSUER: "GA..."  # Same as above if self-issued
+
+COMPLIANCE_SERVER: "https://compliance.honorclose.dev"
+  # Must implement SEP-12 (customer info) & SEP-6 (deposit/withdrawal)
+
+SIGNING_KEYS:
+  - role: "payout_authority"
+    key: "GA...auth1"
+  - role: "revocation_guardian"
+    key: "GA...guard"
+
+WEB_AUTH_ENDPOINT: "https://auth.honorclose.dev/stellar"
